@@ -17,6 +17,21 @@
 bool search(int value, int values[], int n)
 {
     // TODO: implement a searching algorithm
+    int i;
+    // check if n is valid
+    if (n <= 0)
+    {
+        return false;
+    }
+    
+    // use linear search
+    for (i = 0; i < n; i++)
+    {
+        if (values[i] == value)
+        {
+            return true;
+        }
+    }
     return false;
 }
 
