@@ -166,26 +166,25 @@ void init(void)
 {
     // TODO
     int row, col, elem;
-    int type = !(d % 2); // true if odd tiles
     for(row = 0; row < d; row++)
     {  
         for(col = 0; col < d; col++)
         {
             // assigns tiles value for normal cases
-            elem = d*d - 1 -row*d - col;
+            elem = d * d - 1 - row * d - col;
             if (row == col == d - 1)
             {
                 // last element
                 elem = 0;
             }
-            else if(type && row == d - 1)
+            else if (!(d % 2) && row == d - 1)
             {
                 // for odd tile board swap 1 and 2
-                if(col == d - 2)
+                if (col == d - 2)
                 {
                     elem = 2;
                 }
-                else if(col == d-3)
+                else if (col == d - 3)
                 {
                     elem = 1;
                 }
@@ -204,13 +203,12 @@ void draw(void)
 {
     // TODO
     int row, col;
-    printf("DEBUG: \n%d\n", board[d - 1][d - 1]);
 
     for(row = 0; row < d; row++)
     {
         for(col = 0; col < d; col++)
         {
-            if(board[row][col] == 0)
+            if (board[row][col] == 0)
             {
                 printf("  _");
             }
@@ -230,13 +228,14 @@ void draw(void)
 bool move(int tile)
 {
     // TODO
-    int row, col, tile_row, tile_col, brk = 0;
+    int row, col, tile_row, tile_col;
+    int brk = 0;
     // search for tile
     for(row = 0; row < d; row++)
     {
         for(col = 0; col < d; col++)
         {
-            if(board[row][col] == tile)
+            if (board[row][col] == tile)
             {
                 tile_row = row;
                 tile_col = col;
@@ -244,11 +243,14 @@ bool move(int tile)
                 break;
             }
         }
-        if(brk) break;
+        if (brk)
+        {
+            break;
+        }
     }
     
     // check if valid move
-    if(abs(empty_row - tile_row) + abs(empty_col - tile_col) == 1)
+    if (abs(empty_row - tile_row) + abs(empty_col - tile_col) == 1)
     {
         board[empty_row][empty_col] = tile;
         empty_row = tile_row;
@@ -266,5 +268,23 @@ bool move(int tile)
 bool won(void)
 {
     // TODO
-    return false;
+    int row, col;
+    for(row = 0; row < d; row++)
+    {
+        for(col = 0; col < d; col++)
+        {
+            // check if not last element
+            if (row + col != 2 * d - 2)
+            {
+                // check if equal to desired value
+                if (board[row][col] != row * d + col + 1)
+                {
+                    // not yet won the game
+                    return false;
+                }
+            }
+        }
+    }
+    // game won
+    return true;
 }
