@@ -32,6 +32,11 @@ int board[DIM_MAX][DIM_MAX];
 // dimensions
 int d;
 
+// empty tile of borad
+int empty_row;
+int empty_col;
+
+
 // prototypes
 void clear(void);
 void greet(void);
@@ -189,6 +194,7 @@ void init(void)
             board[row][col] = elem;
         }
     }
+    empty_row = empty_col = d - 1;
 }
 
 /**
@@ -224,6 +230,32 @@ void draw(void)
 bool move(int tile)
 {
     // TODO
+    int row, col, tile_row, tile_col, brk = 0;
+    // search for tile
+    for(row = 0; row < d; row++)
+    {
+        for(col = 0; col < d; col++)
+        {
+            if(board[row][col] == tile)
+            {
+                tile_row = row;
+                tile_col = col;
+                brk = 1;
+                break;
+            }
+        }
+        if(brk) break;
+    }
+    
+    // check if valid move
+    if(abs(empty_row - tile_row) + abs(empty_col - tile_col) == 1)
+    {
+        board[empty_row][empty_col] = tile;
+        empty_row = tile_row;
+        empty_col = tile_col;
+        board[empty_row][empty_col] = 0;
+        return true;
+    }
     return false;
 }
 

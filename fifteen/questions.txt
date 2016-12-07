@@ -3,7 +3,18 @@ questions.txt
 Computer Science 50
 Problem Set 3
 
-0. TODO
-1. TODO
-2. TODO
-3. TODO
+0. TODO Besides 4 × 4 (which are Game of Fifteen’s dimensions), what other dimensions does the framework allow?
+Ans. The game allows dimensions from 3*3 to 9*9 inclusive
+
+1. TODO With what sort of data structure is the game’s board represented?
+Ans. The game's board is represented by a 2 dimentional array.
+
+2. TODO What function is called to greet the player at game’s start?
+Ans. The program calls the greet function which contains three functions :-
+     1. clear - to clear the screen
+     2. printf - to print welcome
+     3. usleep - to pause execution for some time
+
+3. TODO What functions do you apparently need to implement?
+Ans. We need to implement the functions of init, draw, move and win.
+
