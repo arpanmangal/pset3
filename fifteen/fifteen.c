@@ -163,9 +163,11 @@ void init(void)
     int row, col, elem;
     int type = !(d % 2); // true if odd tiles
     for(row = 0; row < d; row++)
-    {
+    {  
         for(col = 0; col < d; col++)
         {
+            // assigns tiles value for normal cases
+            elem = d*d - 1 -row*d - col;
             if (row == col == d - 1)
             {
                 // last element
@@ -183,11 +185,6 @@ void init(void)
                     elem = 1;
                 }
             }
-            else
-            {
-                // assigns proper tile value for other cases
-                elem = d*d - 1 -row*d - col;
-            }
             
             board[row][col] = elem;
         }
@@ -200,6 +197,24 @@ void init(void)
 void draw(void)
 {
     // TODO
+    int row, col;
+    printf("DEBUG: \n%d\n", board[d - 1][d - 1]);
+
+    for(row = 0; row < d; row++)
+    {
+        for(col = 0; col < d; col++)
+        {
+            if(board[row][col] == 0)
+            {
+                printf("  _");
+            }
+            else
+            {
+                printf(" %2d", board[row][col]);
+            }
+        }
+        printf("\n");
+    }
 }
 
 /**
