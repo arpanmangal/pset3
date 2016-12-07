@@ -160,6 +160,38 @@ void greet(void)
 void init(void)
 {
     // TODO
+    int row, col, elem;
+    int type = !(d % 2); // true if odd tiles
+    for(row = 0; row < d; row++)
+    {
+        for(col = 0; col < d; col++)
+        {
+            if (row == col == d - 1)
+            {
+                // last element
+                elem = 0;
+            }
+            else if(type && row == d - 1)
+            {
+                // for odd tile board swap 1 and 2
+                if(col == d - 2)
+                {
+                    elem = 2;
+                }
+                else if(col == d-3)
+                {
+                    elem = 1;
+                }
+            }
+            else
+            {
+                // assigns proper tile value for other cases
+                elem = d*d - 1 -row*d - col;
+            }
+            
+            board[row][col] = elem;
+        }
+    }
 }
 
 /**
