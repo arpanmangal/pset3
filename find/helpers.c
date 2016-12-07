@@ -8,6 +8,7 @@
  */
        
 #include <cs50.h>
+#include<stdio.h>
 
 #include "helpers.h"
 
@@ -35,11 +36,32 @@ bool search(int value, int values[], int n)
     return false;
 }
 
+// swapping function
+void swap (int *a, int *b)
+{
+    int tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
+
 /**
  * Sorts array of n values.
  */
 void sort(int values[], int n)
 {
     // TODO: implement an O(n^2) sorting algorithm
+    // sorting using bubble sort
+    int phase, i;
+    for (phase = 0; phase < n-1; phase++)
+    {
+        for (i = 0; i < n-phase-1 ; i++)
+        {
+            if (values[i] > values[i+1])
+            {
+                //printf("\nswapping %d %d\n",values[i],values[i+1]);
+                swap (&values[i], &values[i+1]);
+            }
+        }
+    }
     return;
 }

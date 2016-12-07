@@ -23,6 +23,7 @@ const int MAX = 65536;
 
 int main(int argc, string argv[])
 {
+    int i;
     // ensure proper usage
     if (argc != 2)
     {
@@ -49,10 +50,13 @@ int main(int argc, string argv[])
         // add hay to stack
         haystack[size] = straw;
     }
-    printf("\n");
+    printf("\n%d$\n",size);
 
     // sort the haystack
     sort(haystack, size);
+    for (i=0; i<5 ; i++){
+        printf(" %d",haystack[i]);
+    }
 
     // try to find needle in haystack
     if (search(needle, haystack, size))
