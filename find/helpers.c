@@ -8,7 +8,6 @@
  */
        
 #include <cs50.h>
-#include<stdio.h>
 
 #include "helpers.h"
 
@@ -18,30 +17,40 @@
 bool search(int value, int values[], int n)
 {
     // TODO: implement a searching algorithm
-    int i;
-    // check if n is valid
+    // binary search
+    
     if (n <= 0)
     {
+        // value can't be in a non-existing array
         return false;
     }
-    
-    // use linear search
-    for (i = 0; i < n; i++)
+   
+    int mid = n / 2;
+   
+    if (values[mid] == value)
     {
-        if (values[i] == value)
-        {
-            return true;
-        }
+        // checks if middle value is equal to "value"
+        return true;
+   }
+   else if (values[mid] > value)  
+    {
+        // searches the array left of middle value
+        return search (value, values, mid);
     }
-    return false;
+    
+   else
+    {
+        // searches the array right of middle value
+        return search(value, values + mid + 1, n - mid - 1);
+   }
 }
 
 // swapping function
-void swap (int *a, int *b)
+void swap(int *num1, int *num2)
 {
-    int tmp = *a;
-    *a = *b;
-    *b = tmp;
+    int tmp = *num1;
+    *num1 = *num2;
+    *num2 = tmp;
 }
 
 /**
@@ -52,14 +61,13 @@ void sort(int values[], int n)
     // TODO: implement an O(n^2) sorting algorithm
     // sorting using bubble sort
     int phase, i;
-    for (phase = 0; phase < n-1; phase++)
+    for (phase = 0; phase < n - 1; phase++)
     {
-        for (i = 0; i < n-phase-1 ; i++)
+        for (i = 0; i < n - phase - 1; i++)
         {
-            if (values[i] > values[i+1])
+            if (values[i] > values[i + 1])
             {
-                //printf("\nswapping %d %d\n",values[i],values[i+1]);
-                swap (&values[i], &values[i+1]);
+                swap (&values[i], &values[i + 1]);
             }
         }
     }
